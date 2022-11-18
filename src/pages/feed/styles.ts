@@ -16,7 +16,6 @@ export const Container = styled.main`
 `
 
 export const Title = styled.h3`
-  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -26,7 +25,6 @@ export const Title = styled.h3`
 `
 
 export const TitleHighlight = styled.h3`
-  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;

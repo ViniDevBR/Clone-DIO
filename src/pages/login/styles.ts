@@ -7,9 +7,8 @@ export const Container = styled.main`
   margin-top: 120px;
 
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  
 `
 
 export const Wrapper = styled.div`
@@ -29,7 +28,6 @@ export const Row = styled.div`
 `
 
 export const Title = styled.h2`
-  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
@@ -41,40 +39,52 @@ export const Title = styled.h2`
 `
 
 export const TitleLogin = styled.p`
-  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
   font-size: 32px;
   line-height: 44px;
-  margin-bottom: 8px;
+  margin-block: 20px;
 `
 
 export const SubtitleLogin = styled.p`
-  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 25px;
   margin-bottom: 35px;
 `
 
 
-export const EsqueciText  = styled.p`
-  font-family: 'Open Sans';
+export const EsqueciText  = styled.a`
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 19px;
 
   color: #E5E044;
+
+  &:hover {
+    text-decoration: underline;
+  }
 ` 
 
-export const CriarText =  styled.p`
-  font-family: 'Open Sans';
+export const DivGradient = styled.div`
+  width: 30%;
+  border-radius: 50px;
+  height: 10px;
+  margin-bottom: 30px;
+  background: linear-gradient(270deg, rgb(50, 33, 78), rgb(135, 71, 175));
+`
+
+export const CriarText =  styled.a`
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 19px;
 
   color: #23DD7A;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `

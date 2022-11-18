@@ -2,40 +2,42 @@ import styled from 'styled-components';
 
 export const Container = styled.main`
   width: 100%;
-  max-width: 80%;
+  height: calc(100vh - 60px);
   margin: 0 auto;
-  margin-top: 120px;
-
+  background: linear-gradient(99.06deg, rgb(0, 0, 0) 45.8%, rgba(0, 0, 0, 0) 90.54%) center center / cover no-repeat, url('./banner-play.webp');
+  background-position: center center;
+  background-repeat: no-repeat;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
 `
-
+export const TitleContainer = styled.div`
+  width: 90%;
+  margin: auto;
+`
 
 export const Title = styled.h2`
-  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
-  font-size: 32px;
-  width: 320px;
+  font-size: 56px;
   margin-bottom: 20px;
-  line-height: 44px;
+  width: 70%;
 
   color: #FFFFFF;
 `
 
 export const TitleHighlight = styled.span`
-  color: #E4105D;;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(90.33deg, rgb(166, 75, 214) , rgb(227, 18, 96));
 `
 
 export const TextContent = styled.p`
-  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 22px;
-  width: 420px;
-  margin-bottom: 20px;
+  margin: 10px 0;
   color: #FFFFFF;
+  width: 65%;
 `

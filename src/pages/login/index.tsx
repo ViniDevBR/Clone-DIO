@@ -20,7 +20,8 @@ import {
   EsqueciText,
   CriarText,
   Row,
-  Wrapper
+  Wrapper,
+  DivGradient
 } from './styles'
 
 interface FormValues {
@@ -53,11 +54,16 @@ export function Login() {
     }
   }
 
+  function handleClickSignUp(){
+    navigate('/signup')
+  }
+
   return (
     <>
       <Header />
       <Container>
         <Column>
+          <DivGradient />
           <Title>
             A plataforma para você aprender com experts, dominar as principais
             tecnologias e entrar mais rápido nas empresas mais desejadas.
@@ -65,13 +71,14 @@ export function Login() {
         </Column>
         <Column>
           <Wrapper>
-            <TitleLogin>Faça seu cadastro</TitleLogin>
+            <DivGradient />
+            <TitleLogin>Já tem cadastro?</TitleLogin>
             <SubtitleLogin>Faça seu login e make the change._</SubtitleLogin>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <Input
                 placeholder="E-mail"
-                leftIcon={<MdEmail />}
+                leftIcon={<MdEmail color='#8747af'/>}
                 name="email"
                 control={control}
               />
@@ -81,7 +88,7 @@ export function Login() {
               <Input
                 type="password"
                 placeholder="Senha"
-                leftIcon={<MdLock />}
+                leftIcon={<MdLock color='#8747af'/>}
                 name="senha"
                 control={control}
               />
@@ -91,8 +98,8 @@ export function Login() {
               <Button title="Entrar" variant="secondary" type="submit" />
             </form>
             <Row>
-              <EsqueciText>Esqueci minha senha</EsqueciText>
-              <CriarText>Criar Conta</CriarText>
+              <EsqueciText href='#'>Esqueci minha senha</EsqueciText>
+              <CriarText onClick={handleClickSignUp}>Criar Conta</CriarText>
             </Row>
           </Wrapper>
         </Column>
