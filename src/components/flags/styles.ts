@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 type img = {
-  filter: boolean
+  filter: '1' | '2'
 }
 
 export const ContainerFlags = styled.div`
@@ -20,7 +20,7 @@ export const Button = styled.button<img>`
     width: 30px;
     transition: all .3s;
 
-    ${({filter}) => filter !== true && css`
+    ${({filter = '1'}) => filter !== '1' && css`
       filter: grayscale(1);
     `}
 

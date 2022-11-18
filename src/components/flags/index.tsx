@@ -9,13 +9,13 @@ import EspanhaFlag from '../../assets/espanha.svg'
 export function Flags() {
   return(
     <ContainerFlags>
-      <Button filter>
+      <Button filter="1">
         <img src={BrasilFlag} alt="Selecionar idioma portugues brasil" />
       </Button>
-      <Button filter={false}>
+      <Button filter='2'>
         <img src={EuaFlag} alt="Selecionar idioma ingles" />
       </Button>
-      <Button filter={false}>
+      <Button filter='2'>
         <img src={EspanhaFlag} alt="Selecionar idioma espanhol" />
       </Button>
     </ContainerFlags>
