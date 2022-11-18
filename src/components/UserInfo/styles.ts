@@ -19,7 +19,6 @@ export const UserPicture = styled.img`
 `
 
 export const NameText = styled.div`
-  font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;

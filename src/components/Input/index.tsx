@@ -1,15 +1,17 @@
 //HOOK FORM
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, ReactNode } from "react";
 //REACT HOOK FORM
 import { Control, Controller, FieldValues } from "react-hook-form";
 //STYLED-COMPONENTS
 import {InputContainer, InputText, IconContainer } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
-  leftIcon: any
+  leftIcon: ReactNode
   control: Control<FieldValues, any>
   name: string
 }
+
+// 
 
 export function Input({...props}: InputProps) {
 
