@@ -20,7 +20,8 @@ export const Wrapper = styled.div`
 
 export const GoBackLogin = styled.a`
   color: #8647AD;
-
+  cursor: pointer;
+  
   &:hover {
     text-decoration: underline;
   }
@@ -60,5 +61,10 @@ export const GoBackLogin2 = styled.p`
 
   a {
     color: #23DD7A;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `

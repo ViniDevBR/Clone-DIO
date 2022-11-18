@@ -8,8 +8,10 @@ import { Header } from '../../components/Header'
 import { Input } from '../../components/Input'
 //API
 import { api } from '../../services/api'
-//HOOK FORM
+//HOOK FORM and YUP
 import { FieldValues, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 //STYLED COMPONENTS
 import {
   Container,
@@ -21,41 +23,54 @@ import {
   CriarText,
   Row,
   Wrapper,
-  DivGradient
+  DivGradient,
+  ErrorText
 } from './styles'
 
-interface FormValues {
+type FormValues = {
   email: string
   senha: string
 }
 
+const schema = yup.object({
+  email: yup.string().required('Campo Obrigatótio').email('E-mail não é valido'),
+  senha: yup.string().min(6, 'Senha Invalida').required('Campo Obrigatótio'),
+}).required();
+
 export function Login() {
   const navigate = useNavigate()
 
-  const { control, handleSubmit, formState: { errors }} = useForm<FieldValues, FormValues>({
+  const { control, handleSubmit, formState: { errors, isValid }} = useForm<FieldValues, FormValues>({
+    resolver: yupResolver(schema),
     reValidateMode: 'onChange',
-    mode: 'onChange'
+    mode: 'onBlur'
   })
+  console.log(errors, isValid)
 
-  async function onSubmit(formData: any) {
-    try {
-      const { data } = await api.get(
-        `/users?email=${formData.email}&senha=${formData.senha}`
-      )
+  const onSubmit = handleSubmit(data => console.log(data));
 
-      if (data.length && data[0].id) {
-        navigate('/feed')
-        return
-      }
-      alert('Usuário ou senha inválido')
-    } catch (error) {
-      console.log('errors', error)
-      //TODO: HOUVE UM ERRO
-    }
-  }
+  // async function onSubmit(formData: any) {
+  //   try {
+  //     const { data } = await api.get(
+  //       `/users?email=${formData.email}&senha=${formData.senha}`
+  //     )
+
+  //     if (data.length && data[0].id) {
+  //       navigate('/feed')
+  //       return
+  //     }
+  //     alert('Usuário ou senha inválido')
+  //   } catch (error) {
+  //     console.log('errors', error)
+  //     //TODO: HOUVE UM ERRO
+  //   }
+  // }
 
   function handleClickSignUp(){
     navigate('/signup')
+  }
+  function handleClickFeed() {
+    navigate('/feed')
   }
 
   return (
@@ -75,17 +90,19 @@ export function Login() {
             <TitleLogin>Já tem cadastro?</TitleLogin>
             <SubtitleLogin>Faça seu login e make the change._</SubtitleLogin>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit}>
               <Input
+                required
                 placeholder="E-mail"
                 leftIcon={<MdEmail color='#8747af'/>}
                 name="email"
                 control={control}
               />
 
-              {errors.email && <span>E-mail é obrigatório</span>}
+              {errors.email?.message && <ErrorText>E-mail inválido</ErrorText>}
 
               <Input
+                required
                 type="password"
                 placeholder="Senha"
                 leftIcon={<MdLock color='#8747af'/>}
@@ -93,7 +110,7 @@ export function Login() {
                 control={control}
               />
 
-              {errors.senha && <span>Senha é obrigatório</span>}
+              {errors.senha?.message && <ErrorText>Campo Obrigatótio</ErrorText>}
 
               <Button title="Entrar" variant="secondary" type="submit" />
             </form>

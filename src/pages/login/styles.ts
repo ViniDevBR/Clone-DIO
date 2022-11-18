@@ -5,7 +5,6 @@ export const Container = styled.main`
   max-width: 80%;
   margin: 0 auto;
   margin-top: 120px;
-
   display: flex;
   justify-content: space-between;
   
@@ -34,8 +33,12 @@ export const Title = styled.h2`
   max-width: 90%;
   margin-bottom: 20px;
   line-height: 44px;
-
   color: #FFFFFF;
+`
+
+export const ErrorText = styled.p`
+  color: #FF0000;
+  font-size: 12px;
 `
 
 export const TitleLogin = styled.p`
@@ -53,7 +56,6 @@ export const SubtitleLogin = styled.p`
   line-height: 25px;
   margin-bottom: 35px;
 `
-
 
 export const EsqueciText  = styled.a`
   font-style: normal;
@@ -81,7 +83,6 @@ export const CriarText =  styled.a`
   font-weight: 700;
   font-size: 14px;
   line-height: 19px;
-
   color: #23DD7A;
 
   &:hover {
