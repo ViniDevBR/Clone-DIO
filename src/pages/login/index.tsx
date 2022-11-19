@@ -9,7 +9,7 @@ import { Input } from '../../components/Input'
 //API
 import { api } from '../../services/api'
 //HOOK FORM and YUP
-import { FieldValues, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 //STYLED COMPONENTS
@@ -37,42 +37,37 @@ const schema = yup.object({
   senha: yup.string().min(6, 'Senha Invalida').required('Campo Obrigatótio'),
 }).required();
 
+
+
 export function Login() {
   const navigate = useNavigate()
 
-  const { control, handleSubmit, formState: { errors, isValid }} = useForm<FieldValues, FormValues>({
+  const { control, handleSubmit, formState: { errors }} = useForm<FormValues>({
     resolver: yupResolver(schema),
     reValidateMode: 'onChange',
     mode: 'onBlur'
   })
-  console.log(errors, isValid)
 
-  const onSubmit = handleSubmit(data => console.log(data));
+  
+  const onSubmit: SubmitHandler<FormValues> = async(formData: FormValues) => {
+    try {
+      const { data } = await api.get(`?email=${formData.email}&senha=${formData.senha}`)
+    
+      if (data.length && data[0].id) {
+        navigate('/feed')
+        return
+      } 
+      alert('Usuario ou senha incorretos')      
 
-  // async function onSubmit(formData: any) {
-  //   try {
-  //     const { data } = await api.get(
-  //       `/users?email=${formData.email}&senha=${formData.senha}`
-  //     )
-
-  //     if (data.length && data[0].id) {
-  //       navigate('/feed')
-  //       return
-  //     }
-  //     alert('Usuário ou senha inválido')
-  //   } catch (error) {
-  //     console.log('errors', error)
-  //     //TODO: HOUVE UM ERRO
-  //   }
-  // }
+    } catch (error) {
+        console.log('errors ===>', error)
+    }
+  }
 
   function handleClickSignUp(){
     navigate('/signup')
   }
-  function handleClickFeed() {
-    navigate('/feed')
-  }
-
+ 
   return (
     <>
       <Header />
@@ -90,7 +85,7 @@ export function Login() {
             <TitleLogin>Já tem cadastro?</TitleLogin>
             <SubtitleLogin>Faça seu login e make the change._</SubtitleLogin>
 
-            <form onSubmit={onSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Input
                 required
                 placeholder="E-mail"

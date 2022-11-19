@@ -39,6 +39,7 @@ export const Title = styled.h2`
 export const ErrorText = styled.p`
   color: #FF0000;
   font-size: 12px;
+  margin-bottom: 10px;
 `
 
 export const TitleLogin = styled.p`
@@ -84,6 +85,7 @@ export const CriarText =  styled.a`
   font-size: 14px;
   line-height: 19px;
   color: #23DD7A;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;

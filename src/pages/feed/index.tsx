@@ -16,12 +16,6 @@ export function Feed() {
             <Card />
             <Card />
             <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
           </Column>
           <Column flex={1}>
             <TitleHighlight> # RANKING 5 TOP DA SEMANA </TitleHighlight>

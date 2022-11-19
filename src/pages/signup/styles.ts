@@ -68,3 +68,9 @@ export const GoBackLogin2 = styled.p`
     }
   }
 `
+
+export const ErrorText = styled.p`
+  color: #FF0000;
+  font-size: 12px;
+  margin-bottom: 10px;
+`

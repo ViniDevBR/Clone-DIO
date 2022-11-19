@@ -4,11 +4,11 @@ import { Header } from '../../components/Header'
 import { Input } from '../../components/Input'
 //STYLED-COMPONENTS
 import { DivGradient, Title } from '../login/styles'
-import { Column, ContainerSignUp, GoBackLogin, TitleSignUp, SubtitleSignUp, Declarations, Wrapper, GoBackLogin2 } from './styles'
+import { Column, ContainerSignUp, GoBackLogin, TitleSignUp, SubtitleSignUp, Declarations, Wrapper, GoBackLogin2, ErrorText } from './styles'
 //REACT ICONS
 import { BsFillPersonFill, MdEmail, MdLock, IoPhonePortraitOutline } from 'react-icons/all'
 //HOOK FORM and YUP
-import { FieldValues, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 //BACK END
@@ -16,42 +16,51 @@ import { api } from '../../services/api'
 //ROUTER DOM
 import { useNavigate } from 'react-router-dom'
 
+interface FormSignUp {
+  email: string
+  name: string
+  senha: string
+  phone: string
+}
 
 const schema = yup.object({
   name: yup.string().required(),
   email: yup.string().required('Campo Obrigatótio').email('E-mail não é valido'),
   senha: yup.string().min(6, 'Senha Invalida').required('Campo Obrigatótio'),
-  phone: yup.number().required().min(11, 'Não esta faltando algum numero?')
+  phone: yup.string().required().min(11, 'Não esta faltando algum numero?')
 }).required();
 
 
 export function SignUp() {
   const navigate = useNavigate()
 
-  const { control, handleSubmit, formState: { errors }} = useForm<FieldValues>({
+  const { control, handleSubmit, formState: { errors }} = useForm<FormSignUp>({
     resolver: yupResolver(schema),
     reValidateMode: 'onChange',
     mode: 'onChange'
   })
+  
+  const onSubmit: SubmitHandler<FormSignUp> = async(formData: FormSignUp) => {
+    try {
+      const { data } = await api.post('', {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone,
+        senha: formData.senha.trim(),
+      })
+     
+      if(data.id){
+        alert('Usuario criado com sucesso!')
+        navigate('/login')
+      } else {
+        alert('Não foi possivel criar usuario')
+      }
 
-  const onSubmit = handleSubmit(data => console.log(data));
-
-  // async function onSubmit(formData: any) {
-  //   try {
-  //     const { data } = await api.get(
-  //       `/users?email=${formData.email}&senha=${formData.senha}`
-  //     )
-
-  //     if (data.length && data[0].id) {
-  //       navigate('/feed')
-  //       return
-  //     }
-  //     alert('Usuário ou senha inválido')
-  //   } catch (error) {
-  //     console.log('errors', error)
-  //     //TODO: HOUVE UM ERRO
-  //   }
-  // }
+    } catch (error) {
+        console.log('errors ===>', error)
+        alert('Não foi possivel criar usuario')
+    }
+  }
 
   function handlelogin(){
     navigate('/login')
@@ -78,7 +87,7 @@ export function SignUp() {
             <TitleSignUp>Comece agora grátis</TitleSignUp>
             <SubtitleSignUp>Faça seu login e make the change._</SubtitleSignUp>
 
-            <form onSubmit={onSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Input
                 required
                 placeholder="Nome completo"
@@ -86,6 +95,7 @@ export function SignUp() {
                 name="name"
                 control={control}
               />
+              {errors.name && <ErrorText>Nome é obrigatório</ErrorText>}
               <Input
                 required
                 placeholder="Seu melhor @e-mail"
@@ -94,17 +104,16 @@ export function SignUp() {
                 control={control}
                 type='email' 
               />
+              {errors.email && <ErrorText>E-mail é obrigatório</ErrorText>}
               <Input
                 required
                 placeholder="Celular ex.: (11) 12345-6789"
                 leftIcon={<IoPhonePortraitOutline color='#8747af'/>}
-                name="email"
+                name="phone"
                 control={control}
                 type='tel' 
               />
-
-              {/* {errors.email && <span>E-mail é obrigatório</span>} */}
-
+              {errors.phone && <ErrorText>Não esta faltando algum numero?</ErrorText>}
               <Input
                 required
                 type="password"
@@ -113,8 +122,7 @@ export function SignUp() {
                 name="senha"
                 control={control}
               />
-
-              {/* {errors.senha && <span>Senha é obrigatório</span>} */}
+              {errors.senha && <ErrorText>Senha é obrigatório</ErrorText>}
 
               <Button title="Criar minha conta grátis" variant="secondary" type="submit" />
             </form>
