@@ -43,11 +43,11 @@ export function Header({autenticado = false}: HeaderProps) {
                 <Input  placeholder='Pesquisar'/>
               </BuscarInputContainer>
               <Menu>Play</Menu>
-              <Menu>Global</Menu>
-              <Menu>English4Tech</Menu>
+              <Menu option='yellow'>Global</Menu>
+              <Menu option='yellow'>English4Tech</Menu>
               <Menu>Artigos</Menu>
               <Menu>Rooms</Menu>
-              <Menu>Seja Premium</Menu>
+              <Menu option='green'>Seja Premium</Menu>
               
             </>
           ) : null}

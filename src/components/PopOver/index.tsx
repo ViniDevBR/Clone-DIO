@@ -1,5 +1,8 @@
+//RADIX UI
 import { Root, Trigger, Portal, Content } from '@radix-ui/react-popover';
+//REACT ICONS
 import { AiFillHeart } from 'react-icons/ai';
+//STYLES
 import { Heart, Details } from './styles';
 import './styles.css'
 

@@ -9,7 +9,7 @@ export const CardContainer = styled.div`
 
 export const ImageBackground = styled.img`
   width: 100%;
-  height: 250px;
+  height: 400px;
 `
 
 export const Content = styled.div`
@@ -69,6 +69,15 @@ export const PostInfo = styled.div`
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
+
+    strong {
+      margin-left: 4px;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 `
 
@@ -80,7 +89,8 @@ export const HasInfo = styled.div`
     font-weight: 700;
     font-size: 12px;
     line-height: 16px;    
-    color: #FFFFFF80  
+    color: #FFFFFF80;
+    margin-bottom : 5px;
   }
 
   p {

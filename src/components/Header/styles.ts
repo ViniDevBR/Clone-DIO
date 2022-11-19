@@ -1,7 +1,14 @@
 import styled, { css }  from 'styled-components';
+
 type Tdiv = {
   auth: boolean
 }
+
+type MenuOptions = {
+  option?: 'yellow' | 'green'
+}
+
+
 export const Wrapper = styled.div<Tdiv>`
   
   background-color: #151515;
@@ -33,7 +40,7 @@ export const Row = styled.div`
 `
 
 export const BuscarInputContainer = styled.div`
-  width: 275px;
+  width: 200px;
   height: 2.75rem;
   background: #2d2d37;
   border-radius: 8px;
@@ -43,14 +50,38 @@ export const BuscarInputContainer = styled.div`
   align-items: center;
 `
 
-export const Menu = styled.a`
+export const Menu = styled.a<MenuOptions>`
+  display: flex;
+  align-items: center;
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 25px;
   color: #FFFFFF;
+  padding-inline: 8px;
   margin-right: 12px;
   cursor: pointer;
+  &:hover {
+    color: purple;
+  }
+
+  ${({option}) => option === 'yellow' && css`
+    &:hover {
+      color: yellow;
+    }
+  `}
+  ${({option}) => option === 'green' && css`
+    color: #000;
+    background-color: #22dd7a;
+    border-radius: 5px;
+    height: 42px;
+    padding-inline: 12px;
+    
+
+    &:hover {
+      color: #fff;
+    }
+  `}
 `
 
 export const MenuRight = styled.a`
@@ -81,6 +112,11 @@ export const Input = styled.input`
   border: 0;
   outline: 0;
   color: #FFFFFF;
+  width: 70%;
+
+  &::placeholder {
+    color: #AEACAC;
+  }
 `
 
 
