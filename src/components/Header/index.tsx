@@ -1,18 +1,23 @@
 //COMPONENTES
 import { Button } from '../Button';
+import { DropDown } from '../DropDown';
+import { PopOver } from '../PopOver';
 //STYLED COMPONENTES
-import { Container, Wrapper, BuscarInputContainer, Input, Row, Menu, MenuRight, UserPicture} from './styles';
+import { Container, Wrapper, BuscarInputContainer, Input, Row, Menu, MenuRight, UserPicture, UserDetails } from './styles';
 //IMG
 import logo from '../../assets/logo-dio.png';
 import { Flags } from '../flags';
 //REACT ROUTER DOM
 import { useNavigate } from 'react-router-dom';
+//REACT ICONS
+import { BsSearch } from 'react-icons/bs'
+import { IoIosNotifications } from 'react-icons/io';
 
 interface HeaderProps {
   autenticado?: boolean
 }
 
-export function Header(props: HeaderProps) {
+export function Header({autenticado = false}: HeaderProps) {
   const navigate = useNavigate();
   
   function handleClickSignIn() {
@@ -26,24 +31,38 @@ export function Header(props: HeaderProps) {
   }
 
   return (
-    <Wrapper>
+    <Wrapper auth={autenticado}>
       <Container>
         <Row>
           <img src={logo} alt="Logo da dio"/>
-          {props.autenticado ? (
+
+          {autenticado ? (
             <>
               <BuscarInputContainer>
-                <Input placeholder='Buscar...'/>
+                <BsSearch  color='#fff'/>
+                <Input  placeholder='Pesquisar'/>
               </BuscarInputContainer>
-              <Menu>Live Code</Menu>
+              <Menu>Play</Menu>
               <Menu>Global</Menu>
-              <Flags />
+              <Menu>English4Tech</Menu>
+              <Menu>Artigos</Menu>
+              <Menu>Rooms</Menu>
+              <Menu>Seja Premium</Menu>
+              
             </>
           ) : null}
+
         </Row>
+
         <Row>
-          {props.autenticado ? 
-          ( <UserPicture src="https://avatars.githubusercontent.com/u/45184516?v=4"/>) 
+          {autenticado ? 
+          (
+            <UserDetails>
+              <IoIosNotifications size={30} color='#FFF'/>
+              <PopOver />
+              <DropDown /> 
+            </UserDetails>
+          ) 
           : 
           (<>  
             <MenuRight onClick={handleClickHome}>Home</MenuRight>  

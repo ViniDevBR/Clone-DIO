@@ -1,17 +1,24 @@
-import styled  from 'styled-components';
-
-export const Wrapper = styled.div`
+import styled, { css }  from 'styled-components';
+type Tdiv = {
+  auth: boolean
+}
+export const Wrapper = styled.div<Tdiv>`
+  
   background-color: #151515;
-  width: 100%;
+  width: 100vw;
   height: 60px;
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+  padding-inline: 20px;
+
+  ${({auth}) => auth === true && css`
+    background-color: #0a0a0a;
+  `}
 `
 
 export const Container = styled.div`  
   width: 100%;
-  max-width: 98%;
   height: 47px;
 
   display: flex;
@@ -27,13 +34,13 @@ export const Row = styled.div`
 
 export const BuscarInputContainer = styled.div`
   width: 275px;
-  height: 30px;
-  background: #2D2D37;
+  height: 2.75rem;
+  background: #2d2d37;
   border-radius: 8px;
-  padding: 2px 5px;
+  padding: 0px 16px;
   margin: 0 12px;
-
   display: flex;
+  align-items: center;
 `
 
 export const Menu = styled.a`
@@ -43,6 +50,7 @@ export const Menu = styled.a`
   line-height: 25px;
   color: #FFFFFF;
   margin-right: 12px;
+  cursor: pointer;
 `
 
 export const MenuRight = styled.a`
@@ -68,7 +76,18 @@ export const UserPicture = styled.img`
 
 export const Input = styled.input`
   background: transparent;
+  padding-inline: 16px;
   flex: 1;
   border: 0;
+  outline: 0;
   color: #FFFFFF;
+`
+
+
+
+export const UserDetails = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 20px;
 `

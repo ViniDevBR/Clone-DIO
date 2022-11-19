@@ -9,6 +9,7 @@ export const ButtonContainer = styled.button<Button>`
   text-transform: uppercase;
   font-weight: 500;
   background: #565656;
+  border: 0;
   border-radius: 22px;
   position: relative;
   cursor: pointer;
